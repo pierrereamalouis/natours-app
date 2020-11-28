@@ -4,12 +4,28 @@ const tours = JSON.parse(
 );
 
 exports.checkID = (req, res, next, val) => {
+  const id = req.params.id * 1;
   if (id > tours.length) {
     return res.status(404).json({
       status: 'Fail',
       message: 'Invalid ID',
     });
   }
+  next();
+};
+exports.checkBody = (req, res, next) => {
+  const body = req.body;
+  const expectedProperties = ['name', 'duration', 'price'];
+
+  for (property of expectedProperties) {
+    if (!body.hasOwnProperty(`${property}`)) {
+      return res.status(400).json({
+        status: 'Fail',
+        message: `Invalid property. Need ${property} instead`,
+      });
+    }
+  }
+
   next();
 };
 exports.getAllTours = (req, res) => {
