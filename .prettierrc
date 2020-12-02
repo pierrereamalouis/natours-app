@@ -1,5 +1,6 @@
 {
-  "singleQuote": true,
+ "singleQuote": true,
+ "trailingComa": "es5",
   "parser": "flow",
   "endOfLine":"auto"
 }
